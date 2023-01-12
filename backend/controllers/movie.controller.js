@@ -1,4 +1,5 @@
 const Movie = require('../models/movie.model');
+const {json} = require("express");
 
 const movieCtrl = {};
 
@@ -14,13 +15,79 @@ movieCtrl.addMovie = async (req, res) =>
 movieCtrl.getMovies = async (req, res) =>
 {
     const movies = await Movie.find()
-        .then((data) => res.json(data))
-            .catch((err) => console.log(err));
+        .then((data) =>
+            res.json(data))
+        .catch((err) => console.log(err));
 }
 
-movieCtrl.getMovie = () => {};
-movieCtrl.deleteMovie = () => {};
-movieCtrl.updateMovie = () => {};
-movieCtrl.getGenres = () => {};
+movieCtrl.getMovie = async (req, res) =>
+{
+    const movie = await Movie.findById(req.params.id).then((data) =>
+    {
+        if (data != null)
+        {
+            res.json(data)
+        }
+        else
+        {
+            res.json({message: 'Movie doesnt exist'})
+        }
+    }).catch(err => console.log(err));
+};
+
+movieCtrl.getMovieName = async (req, res) =>
+{
+    const movie = await Movie.find({title: req.params.name}).then((data) =>
+    {
+        if (data != null)
+        {
+            res.json(data)
+        }
+        else
+        {
+            res.json({message: 'Movie doesnt exist'})
+        }
+    }).catch(err => console.log(err));
+};
+
+movieCtrl.updateMovie = async (req, res) =>
+{
+    const movie = req.body;
+    await Movie.findByIdAndUpdate(
+        req.params.id,
+        {$set: movie},
+        {new: true}
+    ).then((data) =>
+    {
+       if (data != null)
+       {
+           res.json({message: 'Movie Successfully Update', data})
+       }
+       else
+       {
+           res.json({message: 'Movie doesnt exist'})
+       }
+    }).catch(err => res.send(err.message));
+};
+
+
+movieCtrl.deleteMovie = async (req, res) =>
+{
+    await Movie.findOneAndDelete(req.params.id).then((data) =>
+    {
+        if (data != null)
+        {
+            res.json({message: 'Movie Successfully Deleted'})
+        }
+        else
+        {
+            res.json({message: 'Movie doesnt exist'})
+        }
+    }).catch(err => res.send(err.message));
+};
+movieCtrl.getGenres = async (req, res) =>
+{
+    await Movie.find().distinct('genres').then((data) => res.json(data)).catch((err) => console.log(err));
+};
 
 module.exports = movieCtrl;
