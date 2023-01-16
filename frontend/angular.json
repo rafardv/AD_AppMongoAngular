@@ -24,10 +24,10 @@
             ],
             "styles": [
               "src/styles.css",
-              "frontend/node_modules/bootstrap/dist/css/bootstrap.css",
-              "frontend/node_modules/@fortawesome/fontawesome-free/css/all.css"
+              "node_modules/bootstrap/dist/css/bootstrap.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.css"
             ],
-            "scripts": ["frontend/node_modules/bootstrap/dist/js/bootstrap.bundle.js"]
+            "scripts": ["node_modules/bootstrap/dist/js/bootstrap.bundle.js"]
           },
           "configurations": {
             "production": {
@@ -94,10 +94,10 @@
             ],
             "styles": [
               "src/styles.css",
-              "frontend/node_modules/bootstrap/dist/css/bootstrap.css",
-              "frontend/node_modules/@fortawesome/fontawesome-free/css/all.css"
+              "node_modules/bootstrap/dist/css/bootstrap.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.css"
             ],
-            "scripts": ["frontend/node_modules/bootstrap/dist/js/bootstrap.bundle.js"]
+            "scripts": ["node_modules/bootstrap/dist/js/bootstrap.bundle.js"]
           }
         }
       }
