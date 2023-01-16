@@ -9,10 +9,26 @@ import {Movie} from "../common/movie";
 export class MovieService
 {
   baseURI = 'http://localhost:3000/api/movies/';
+
   constructor(private http: HttpClient) { }
 
   getMoviesList(): Observable<Movie[]>
   {
     return this.http.get<Movie[]>(this.baseURI);
+  }
+
+  getGenres(): Observable<string[]>
+  {
+    return this.http.get<string[]>(this.baseURI + 'genres');
+  }
+
+  updateMovie(id: string, movie: Movie): Observable<any>
+  {
+    return this.http.put<any>(this.baseURI + id, movie);
+  }
+
+  addMovie(movie: Movie): Observable<any>
+  {
+    return this.http.post<any>(this.baseURI, movie);
   }
 }

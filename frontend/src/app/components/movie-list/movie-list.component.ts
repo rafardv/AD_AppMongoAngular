@@ -91,7 +91,9 @@ export class MovieListComponent implements OnInit
       this.movieService.getMoviesList().subscribe((data: Movie[]) =>
       {
         this.movies = data;
-      })
+      });
+
+      this.movieService.getGenres().subscribe(data => this.genres = data);
   }
 
   newMovie()
@@ -116,6 +118,14 @@ export class MovieListComponent implements OnInit
 
   onSubmit()
   {
-
+    if (this.editar)
+    {
+      const id = this.formMovie.getRawValue()._id;
+      this.movieService.updateMovie(id, this.formMovie.getRawValue()).subscribe(data => this.loadMovies());
+    }
+    else
+    {
+      this.movieService.addMovie(this.formMovie.getRawValue()).subscribe(data => this.loadMovies())
+    }
   }
 }
