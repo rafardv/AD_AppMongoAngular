@@ -31,4 +31,9 @@ export class MovieService
   {
     return this.http.post<any>(this.baseURI, movie);
   }
+
+  deleteMovie(id: string): Observable<any>
+  {
+    return this.http.delete<any>(this.baseURI + id);
+  }
 }

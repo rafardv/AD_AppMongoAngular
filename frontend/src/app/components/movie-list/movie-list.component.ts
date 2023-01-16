@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Imdb, Movie} from "../../common/movie";
 import {MovieService} from "../../services/movie.service";
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-movie-list',
@@ -23,14 +23,12 @@ export class MovieListComponent implements OnInit
       director: [''],
       plot: [''],
       poster: [''],
-      genres: []
+      genres: [],
+      __v: ['']
     });
   movies: Movie[] = [];
 
-  myNewGenres = new FormGroup(
-    {
-      newGenres: new FormGroup('')
-    });
+  myNewGenres = new FormGroup({newGenres: new FormGroup('')});
 
   genres: string[] = [];
   editar = false;
@@ -98,22 +96,38 @@ export class MovieListComponent implements OnInit
 
   newMovie()
   {
-
+    this.formMovie.reset();
+    this.editar = false;
   }
 
   loadMovie(movie: Movie)
   {
-
+    this.formMovie.setValue(movie);
+    this.editar = true;
   }
 
   removeMovie(movie: Movie)
   {
-
+    if (confirm('Desea borrar' + movie.title + '?'))
+    {
+      this.movieService.deleteMovie(movie._id).subscribe(data => this.loadMovies());
+    }
   }
 
   addNewGenre(newGenre: any)
   {
-
+    let newGenres;
+    if (!this.editar)
+    {
+      this.genres.push(newGenre);
+    }
+    else
+    {
+      newGenres = this.formMovie.getRawValue().genres;
+      newGenres.push(newGenre);
+      this.formMovie.setControl('genres', new FormControl(newGenres));
+    }
+    this.myNewGenres.reset();
   }
 
   onSubmit()
