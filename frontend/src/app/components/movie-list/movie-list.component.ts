@@ -28,7 +28,7 @@ export class MovieListComponent implements OnInit
     });
   movies: Movie[] = [];
 
-  myNewGenres = new FormGroup({newGenres: new FormGroup('')});
+  myNewGenres = new FormGroup({newGenre: new FormControl('')});
 
   genres: string[] = [];
   editar = false;
@@ -81,7 +81,7 @@ export class MovieListComponent implements OnInit
 
   get newGenre(): any
   {
-    return this.formMovie.get('newGenre') ?.value;
+    return this.myNewGenres.get('newGenre') ?.value;
   }
 
   private loadMovies()
@@ -124,7 +124,10 @@ export class MovieListComponent implements OnInit
     else
     {
       newGenres = this.formMovie.getRawValue().genres;
+      console.log(newGenres)
       newGenres.push(newGenre);
+      console.log(newGenres);
+      this.genres.push(newGenre);
       this.formMovie.setControl('genres', new FormControl(newGenres));
     }
     this.myNewGenres.reset();
