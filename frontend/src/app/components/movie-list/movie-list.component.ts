@@ -23,7 +23,7 @@ export class MovieListComponent implements OnInit
       director: [''],
       plot: [''],
       poster: [''],
-      genres: [[Validators.required]],
+      genres: this.formBuilder.array([[Validators.minLength(1), Validators.required]]),
       __v: ['']
     });
   movies: Movie[] = [];
