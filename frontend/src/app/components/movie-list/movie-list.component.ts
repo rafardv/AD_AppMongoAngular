@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Imdb, Movie} from "../../common/movie";
 import {MovieService} from "../../services/movie.service";
-import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-movie-list',
@@ -23,7 +23,7 @@ export class MovieListComponent implements OnInit
       director: [''],
       plot: [''],
       poster: [''],
-      genres: [],
+      genres: [[Validators.required]],
       __v: ['']
     });
   movies: Movie[] = [];
