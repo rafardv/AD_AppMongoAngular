@@ -134,9 +134,9 @@ export class MovieListComponent implements OnInit
     this.myNewGenres.reset();
   }
 
-  onSubmit(formEdit: any)
+  onSubmit(form: any)
   {
-    if (formEdit.valid)
+    if (form.valid)
     {
       if (this.editar)
       {
