@@ -47,7 +47,7 @@
               <h5 class="modal-title" id="miModalLabel">{{editar?title:'New Movie'}}</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form [formGroup]="formMovie" (ngSubmit)="onSubmit()">
+            <form #formEdit="ngForm" [formGroup]="formMovie" (ngSubmit)="onSubmit(formEdit)">
               <div class="modal-body">
                 <div class="form-floating mb-3">
                   <input formControlName="title" type="text" class="form-control" id="title" value="{{title}}" placeholder="Title">
@@ -120,7 +120,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
+                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" [disabled]="formEdit.invalid">Save changes</button>
               </div>
             </form>
           </div>
@@ -128,6 +128,7 @@
       </div>
     </div>
   </div>
+
   <div *ngIf="movies.length == 0">
     <div class="modal fade" id="miModalZero" tabindex="-1" aria-labelledby="miModalLabelZero" aria-hidden="true">
       <div class="modal-dialog">
@@ -136,7 +137,7 @@
             <h5 class="modal-title" id="miModalLabelZero">{{editar?title:'New Movie'}}</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <form [formGroup]="formMovie" (ngSubmit)="onSubmit()">
+          <form #formNew="ngForm" [formGroup]="formMovie" (ngSubmit)="onSubmit(formNew)">
             <div class="modal-body">
               <div class="form-floating mb-3">
                 <input formControlName="title" type="text" class="form-control" id="titleZ" value="{{title}}" placeholder="Title">
@@ -166,6 +167,7 @@
                 <textarea formControlName="plot" rows="7" class="form-control" id="plotZ" value="{{plot}}"></textarea>
                 <label for="plotZ">Plot</label>
               </div>
+
               <!-- select genres -->
               <div *ngIf="editar">
                 <label for="SelectZ">Genres</label>
@@ -211,7 +213,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
+              <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" [disabled]="formNew.invalid">Save changes</button>
             </div>
           </form>
         </div>

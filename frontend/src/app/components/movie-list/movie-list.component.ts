@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Imdb, Movie} from "../../common/movie";
 import {MovieService} from "../../services/movie.service";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-movie-list',
@@ -23,9 +23,10 @@ export class MovieListComponent implements OnInit
       director: [''],
       plot: [''],
       poster: [''],
-      genres: this.formBuilder.array([[Validators.minLength(1), Validators.required]]),
+      genres: [[], [Validators.required]],
       __v: ['']
     });
+
   movies: Movie[] = [];
 
   myNewGenres = new FormGroup({newGenre: new FormControl('')});
@@ -133,16 +134,19 @@ export class MovieListComponent implements OnInit
     this.myNewGenres.reset();
   }
 
-  onSubmit()
+  onSubmit(formEdit: any)
   {
-    if (this.editar)
+    if (formEdit.valid)
     {
-      const id = this.formMovie.getRawValue()._id;
-      this.movieService.updateMovie(id, this.formMovie.getRawValue()).subscribe(data => this.loadMovies());
-    }
-    else
-    {
-      this.movieService.addMovie(this.formMovie.getRawValue()).subscribe(data => this.loadMovies())
+      if (this.editar)
+      {
+        const id = this.formMovie.getRawValue()._id;
+        this.movieService.updateMovie(id, this.formMovie.getRawValue()).subscribe(data => this.loadMovies());
+      }
+      else
+      {
+        this.movieService.addMovie(this.formMovie.getRawValue()).subscribe(data => this.loadMovies())
+      }
     }
   }
 }
