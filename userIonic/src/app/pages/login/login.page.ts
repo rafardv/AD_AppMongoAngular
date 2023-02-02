@@ -62,10 +62,11 @@ export class LoginPage implements OnInit
   {
     console.log(fRegistro.valid);
   }
-  seleccionarAvatar(avatar: {img: string; seleccionado: boolean})
+
+  seleccionarAvatar(avatar: { img: string; selccionado: boolean })
   {
     this.avatars.forEach(av => av.selccionado = false);
-    avatar.seleccionado = true;
+    avatar.selccionado = true;
   }
 
   mostrarRegistro()

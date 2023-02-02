@@ -41,13 +41,12 @@
         </ion-row>
         <ion-row>
           <ion-col>
-            <swiper [options]="avatarSlide">
+            <swiper [config]="avatarSlide">
               <ng-template *ngFor="let avatar of avatars">
                 <ion-content>
                   <img class="pick-avatar" [ngClass]="{'pick-avatar-seleccionado': avatar.selccionado}"
                        (click)="seleccionarAvatar(avatar)" src="/assets/avatars/{{avatar.img}}" alt="{{avatar.img}}">
                 </ion-content>
-
               </ng-template>
             </swiper>
           </ion-col>
