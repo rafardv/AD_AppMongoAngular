@@ -9,7 +9,6 @@ import {NgForm} from "@angular/forms";
 })
 export class LoginPage implements OnInit
 {
-
   @ViewChild('slidePrincipal', {static: true}) slides!: Swiper;
   avatars: {img: string; selccionado: boolean}[] =
     [
