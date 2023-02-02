@@ -77,8 +77,6 @@ export class LoginPage implements OnInit
 
   mostrarLogin()
   {
-    this.slides.isLocked;
     this.slides.slideTo(1);
-    this.slides.isLocked;
   }
 }
