@@ -1,11 +1,8 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import {UsuarioGuard} from "./guards/usuario.guard";
 
 const routes: Routes = [
-  {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
-  },
   {
     path: '',
     redirectTo: 'login',
@@ -14,6 +11,11 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'series',
+    canActivate: [UsuarioGuard],
+    loadChildren: () => import('./pages/series/series.module').then( m => m.SeriesPageModule)
   },
 ];
 

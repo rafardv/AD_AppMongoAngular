@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Storage} from "@ionic/storage-angular";
 import {NavController} from "@ionic/angular";
+import {Usuario} from "../common/interfaces";
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +30,8 @@ export class UserService
     const data = {email, password};
     return new Promise(resolve =>
     {
-      this.http.post(`${this.userURL}login`, data).subscribe(this.promesaGuardaToken(resolve));    })
+      this.http.post(`${this.userURL}login`, data).subscribe(this.promesaGuardaToken(resolve));
+    });
   }
 
   private async init()
@@ -71,7 +73,7 @@ export class UserService
     this.token = await this.storage.get('token') || null;
   }
 
-  private async validaToken(): Promise<boolean>
+  async validaToken(): Promise<boolean>
   {
     // Cargamos el token del storage
     await this.cargarToken();
@@ -109,7 +111,7 @@ export class UserService
     })
   }
 
-  private registro(usuario: Usuario): Promise<any>
+  registro(usuario: Usuario): Promise<any>
   {
     return new Promise(resolve =>
     {
