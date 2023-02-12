@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Imdb, Movie} from "../../common/movie";
 import {MovieService} from "../../services/movie.service";
-import {FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-movie-list',
