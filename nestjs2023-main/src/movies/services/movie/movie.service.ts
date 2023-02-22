@@ -22,11 +22,9 @@ export class MovieService {
         // return this.movieModel.finOne({_id: idMovie});
     }
 
-    async updateMovie(idMovie: string, movieDto: MovieDto): Promise<Movie>{
-        return this.movieModel.findByIdAndUpdate(
-            idMovie,
-            {$set: movieDto},
-            {new: true});
+    async updateMovie(idMovie: string, movieDto: MovieDto): Promise<Movie>
+    {
+        return this.movieModel.findByIdAndUpdate(idMovie, {$set: movieDto}, {new: true});
     }
 
     async deleteMovie(idMovie: string): Promise<any>{

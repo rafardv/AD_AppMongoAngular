@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Imdb, Movie} from "../../common/movie";
+import {Movie} from "../../common/movie";
 import {MovieService} from "../../services/movie.service";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
